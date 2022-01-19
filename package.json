@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Thusharprasanth/blogApp/issues"
   },
-  "homepage": "https://github.com/Thusharprasanth/blogApp#readme"
+  "homepage": "https://github.com/Thusharprasanth/blogApp#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2"
+  }
 }
