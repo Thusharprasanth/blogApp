@@ -1,7 +1,8 @@
 const express = require("express")
 const mongoose = require("mongoose")
-const Blog = require('./models/blog')
-var methodOverride = require('method-override')
+const methodOverride = require('method-override')
+const blogRoutes = require('./routes/blogRoutes')
+
 
 const app = express()
 
@@ -21,59 +22,5 @@ mongoose.connect(dburl).then(
 }
 ).catch((err)=>console.log(err))
 
-app.get('/',(req,res)=>{
-    res.redirect("/blogs")
-})
-app.get('/about',(req,res)=>{
-    res.render("about")
-})
-
-app.get('/newBlog',(req,res)=>{
-    res.render("newBlog")
-})
-
-app.get('/blogs', (req,res)=>{
-    Blog.find().sort({createdAt:-1})
-    .then((data)=>{
-        res.render('home',{'blogs':data})
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
-})
-
-
-app.post('/blogs',(req,res)=>{
-    const blog = new Blog(req.body)
-
-    blog.save()
-    .then((result)=>{
-        res.redirect('/blogs')
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
-})
-
-app.get('/blogs/:id', (req,res)=>{
-    const id = req.params.id;
-    Blog.findById(id)
-    .then((result)=>{
-        res.render('details', {'blog' : result})
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
-})
-
-app.delete('/blogs/:id',(req,res)=>{
-    const { id } = req.params
-    const blog = Blog.findById(id)
-    blog.deleteOne()
-    .then((result)=>{
-        res.redirect('/blogs')
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
-})
+//blog routes
+app.use(blogRoutes)
