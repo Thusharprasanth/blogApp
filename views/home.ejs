@@ -4,6 +4,19 @@
     <%- include('partials/head.ejs') %>
 </head>
 <body>
-    <h1>Index page</h1>
+    <%- include('partials/nav.ejs') %>
+    <h4>All Blogs</h4>
+    <div class="card" >
+        <div class="card-body">
+          <h5 class="card-title"><%= title %></h5>
+          <p class="card-text"><%= content %> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem recusandae distinctio harum quis commodi quos nam repudiandae, a qui necessitatibus ratione. Quasi illum alias dolorum aspernatur perferendis, animi numquam Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam maiores voluptatibus autem dicta eos cumque incidunt dolores reprehenderit perspiciatis hic nemo eligendi ipsum illo, dolorum libero in earum ut pariatur?
+            <a style="text-decoration: none;" href="#" class="card-link">Read more...</a>
+        </p>
+        </div>
+      </div>
+    
+            
+
+    <%- include("partials/footer.ejs") %>
 </body>
 </html>
