@@ -9,9 +9,12 @@
       
     <h5>All Blogs</h5>
     <% for(blog of blogs) {%>
-      <div class="card" >
+      <div style="border-left: solid 0.3em;
+      border-left-color: black;" class="card mb-2" >
         <div class="card-body">
-          <h5 class="card-title"><%= blog.title %></h5>
+          <a style="text-decoration: none;color: black;" href="/blogs/<%= blog._id %>">
+            <h5 class="card-title"><%= blog.title %></h5>
+          </a>
           <p class="card-text"><%= blog.content %>
             <a style="text-decoration: none;" href="#" class="card-link">Read more...</a>
         </p>

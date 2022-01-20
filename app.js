@@ -26,8 +26,12 @@ app.get('/about',(req,res)=>{
     res.render("about")
 })
 
+app.get('/newBlog',(req,res)=>{
+    res.render("newBlog")
+})
+
 app.get('/blogs', (req,res)=>{
-    Blog.find()
+    Blog.find().sort({createdAt:-1})
     .then((data)=>{
         res.render('home',{'blogs':data})
     })
@@ -36,11 +40,26 @@ app.get('/blogs', (req,res)=>{
     })
 })
 
-app.get('/newBlog',(req,res)=>{
-    res.render("newBlog")
+
+app.post('/blogs',(req,res)=>{
+    const blog = new Blog(req.body)
+
+    blog.save()
+    .then((result)=>{
+        res.redirect('/blogs')
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
 })
-app.post('/newBlog',(req,res)=>{
-    const title = req.body.title;
-    const content = req.body.content
-    res.render("home", { title, content })
+
+app.get('/blogs/:id', (req,res)=>{
+    const id = req.params.id;
+    Blog.findById(id)
+    .then((result)=>{
+        res.render('details', {'blog' : result})
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
 })

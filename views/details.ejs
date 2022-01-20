@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("partials/head.ejs") %>
+</head>
+<body>
+    <%- include('partials/nav.ejs') %>
+    <div class="container">
+        <h1><%= blog.title %></h1>
+    <p> <%= blog.content %> </p>
+    <!-- <form method="post" action="/blogs/<%= blog._id %>">
+        <a class="btn btn-danger">Delete</a>
+    </form> -->
+    <%- include("partials/footer.ejs") %>
+    </div>
+</body>
+</html>
