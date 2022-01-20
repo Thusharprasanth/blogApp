@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const Blog = require('./models/blog')
+var methodOverride = require('method-override')
 
 const app = express()
 
@@ -8,6 +9,7 @@ const app = express()
 app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'))
 
 const dburl = "mongodb+srv://thusharprasanth:test1234@cluster0.vb5wu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
@@ -58,6 +60,18 @@ app.get('/blogs/:id', (req,res)=>{
     Blog.findById(id)
     .then((result)=>{
         res.render('details', {'blog' : result})
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+})
+
+app.delete('/blogs/:id',(req,res)=>{
+    const { id } = req.params
+    const blog = Blog.findById(id)
+    blog.deleteOne()
+    .then((result)=>{
+        res.redirect('/blogs')
     })
     .catch((err)=>{
         console.log(err);
